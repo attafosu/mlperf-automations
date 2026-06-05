@@ -118,7 +118,10 @@ EXTRACT_RULES = {
     },
     "driver": {
         "source": "env",
-        "candidates": ["MLC_HOST_GPU_DRIVER_VERSION"],
+        "candidates": [
+            "MLC_HOST_GPU_DRIVER_VERSION",
+            "MLC_XPU_DEVICE_PROP_XPU_DRIVER_VERSION",
+        ],
     },
     "operating_system": {
         "source": "env",
@@ -186,6 +189,11 @@ def detect_inference_backend():
                     or os.environ.get("MLC_ROCM_DEVICE_PROP_ROCM_VERSION", ""))
     if rocm_version:
         parts.append(f"ROCm {rocm_version}")
+
+    xpu_count = os.environ.get("MLC_XPU_NUM_DEVICES", "")
+    xpu_driver = os.environ.get("MLC_XPU_DEVICE_PROP_XPU_DRIVER_VERSION", "")
+    if (xpu_count and str(xpu_count) != "0") or xpu_driver:
+        parts.append(f"XPU {xpu_driver}".rstrip())
 
     cudnn_version = None
     for pkg in ("nvidia-cudnn-cu12", "nvidia-cudnn-cu11", "cudnn"):

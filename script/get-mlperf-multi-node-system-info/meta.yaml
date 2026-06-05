@@ -80,25 +80,28 @@ prehook_deps:
 # Variations
 variations:
   cuda:
-    group: accelerator-backend
+    group: gpu-platform
     adr:
       mlperf-single-node-system-info:
         tags: _cuda
     env:
+      MLC_GPU_PLATFORM: cuda
       MLC_ACCELERATOR_BACKEND: cuda
   rocm:
-    group: accelerator-backend
+    group: gpu-platform
     adr:
       mlperf-single-node-system-info:
         tags: _rocm
     env:
+      MLC_GPU_PLATFORM: rocm
       MLC_ACCELERATOR_BACKEND: rocm
   xpu:
-    group: accelerator-backend
+    group: gpu-platform
     adr:
       mlperf-single-node-system-info:
         tags: _xpu
     env:
+      MLC_GPU_PLATFORM: xpu
       MLC_ACCELERATOR_BACKEND: xpu
   exclude_current_node:
     env:

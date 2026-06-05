@@ -39,9 +39,6 @@ deps:
     MLC_HOST_OS_TYPE:
     - windows
 - tags: get,xpu-devices
-  enable_if_env:
-    MLC_GPU_PLATFORM:
-    - xpu
   skip_if_env:
     MLC_HOST_OS_TYPE:
     - windows
@@ -58,17 +55,20 @@ deps:
 # Variations
 variations:
   cuda:
-    group: accelerator-backend
+    group: gpu-platform
     env:
-      MLC_ACCELERATOR_BACKEND: cuda
+      MLC_GPU_PLATFORM: cuda
     adr:
       platform-details:
         tags: _cuda
   rocm:
-    group: accelerator-backend
+    group: gpu-platform
     env:
-      MLC_ACCELERATOR_BACKEND: rocm
+      MLC_GPU_PLATFORM: rocm
   xpu:
-    group: accelerator-backend
+    group: gpu-platform
     env:
-      MLC_ACCELERATOR_BACKEND: xpu
+      MLC_GPU_PLATFORM: xpu
+    adr:
+      platform-details:
+        tags: _xpu

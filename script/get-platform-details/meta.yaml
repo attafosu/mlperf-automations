@@ -96,6 +96,12 @@ variations:
     - tags: get,cuda-devices
     env:
       MLC_ACCELERATOR_BACKEND: cuda
+  xpu:
+    group: gpu-driver
+    deps:
+    - tags: get,xpu-devices
+    env:
+      MLC_ACCELERATOR_BACKEND: xpu
 
 # Tests
 tests:
